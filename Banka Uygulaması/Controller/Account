@@ -1,0 +1,35 @@
+package com.example.bankapp.bank.controller;
+
+import com.example.bankapp.bank.entity.Account;
+import com.example.bankapp.bank.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/accounts")
+public class AccountController {
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping
+    public List<Account> getAllAccounts() {
+        return accountService.getAllAccounts();
+    }
+
+    @GetMapping("/{ibanNo}")
+    public Account getAccountByIban(@PathVariable String ibanNo) {
+        return accountService.findByIbanNo(ibanNo);
+    }
+
+    @PostMapping
+    public Account createAccount(@RequestBody Account account) {
+        return accountService.saveAccount(account);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAccount(@PathVariable Long id) {
+        accountService.deleteAccount(id);
+    }
+}

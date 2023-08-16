@@ -1,0 +1,39 @@
+package com.example.bankapp.bank.service;
+
+import com.example.bankapp.bank.entity.Customer;
+import com.example.bankapp.bank.entity.Customer;
+import com.example.bankapp.bank.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CustomerService {
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    public Customer findById(Long id) {
+        return customerRepository.findById(id).orElse(null);
+    }
+
+    public Customer findByIdentityNo(String identityNo) {
+        return customerRepository.findByIdentityNo(identityNo);
+    }
+
+    public Customer findByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    public Customer saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
+    }
+}
